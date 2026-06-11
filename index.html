@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Полина Гаврилова — руководитель проектов и арт-директор</title>
+  <meta name="description" content="Управление проектами и арт-дирекшн: Студия Артемия Лебедева, Туризм.РФ, Сбер (Kandinsky). Проекты для «Магнита», ЦСКА, туристских территорий.">
+  <meta property="og:title" content="Полина Гаврилова — руководитель проектов и арт-директор">
+  <meta property="og:description" content="Управление проектами и арт-дирекшн: Студия Артемия Лебедева, Туризм.РФ, Сбер (Kandinsky).">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://polinagavrilova.ru/">
+  <meta property="og:image" content="https://polinagavrilova.ru/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://polinagavrilova.ru/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #EFEFF2;
+      --fg: #0A0A0B;
+      --gray: #6B6B70;
+      --border: #E2E2E5;
+      --accent: #FF2E88;
+      --accent-ink: #D40A6E;
+      --max: 1140px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      cursor: url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%23FF2E88%22/%3E%3C/svg%3E') 8 8, auto;
+    }
+    a, button, .btn, .card, nav a, .logo {
+      cursor: url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2228%22 height=%2228%22%3E%3Ccircle cx=%2214%22 cy=%2214%22 r=%2211%22 fill=%22none%22 stroke=%22%23FF2E88%22 stroke-width=%222.5%22/%3E%3Ccircle cx=%2214%22 cy=%2214%22 r=%224%22 fill=%22%23FF2E88%22/%3E%3C/svg%3E') 14 14, pointer;
+    }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    .skip { position: absolute; left: -9999px; top: 0; background: var(--fg); color: #fff; padding: 10px 16px; z-index: 100; }
+    .skip:focus { left: 0; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(239,239,242,.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo {
+      font-family: 'Sofia Sans Extra Condensed', sans-serif; font-weight: 800; font-size: 19px;
+      text-transform: uppercase; letter-spacing: .02em; text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav ul { display: flex; gap: 28px; list-style: none; }
+    nav a {
+      text-decoration: none; font-size: 15px; font-weight: 500; color: var(--gray);
+      padding: 8px 14px; border-radius: 99px; white-space: nowrap;
+      transition: color .2s, background-color .2s;
+    }
+    nav a:hover { color: var(--accent-ink); background: rgba(255,46,136,.10); }
+
+    /* Preloader */
+    .loader {
+      position: fixed; inset: 0; z-index: 200; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .5s ease;
+    }
+    .loader.done { opacity: 0; pointer-events: none; }
+    .loader canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .loader-bar {
+      position: relative; width: min(320px, 60vw); height: 4px;
+      background: rgba(10,10,11,.12); border-radius: 99px; overflow: hidden;
+    }
+    .loader-bar span {
+      display: block; height: 100%; width: 0;
+      background: var(--accent); border-radius: 99px;
+      transition: width .25s ease;
+    }
+    body.loading { overflow: hidden; }
+    body.loading .hero .kicker, body.loading .hero h1, body.loading .hero .phrase-box,
+    body.loading .hero .sub, body.loading .hero .employers, body.loading .hero-photo {
+      animation-play-state: paused;
+    }
+
+    /* Chaos banner */
+    .chaos {
+      height: 360px;
+      -webkit-mask-image: linear-gradient(#000 55%, transparent 100%);
+      mask-image: linear-gradient(#000 55%, transparent 100%);
+    }
+    .chaos canvas { width: 100%; height: 100%; display: block; }
+    @media (max-width: 600px) { .chaos { height: 200px; } }
+
+    /* Hero */
+    .hero { padding: 0 24px 80px; margin-top: -130px; position: relative; z-index: 1; }
+    @media (max-width: 600px) { .hero { margin-top: -70px; } }
+    .hero-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: center; }
+    .kicker {
+      display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent-ink); margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Sofia Sans Extra Condensed', sans-serif;
+      font-size: clamp(44px, 6.4vw, 76px); line-height: .98; letter-spacing: .01em;
+      text-transform: uppercase;
+      font-weight: 800; margin-bottom: 14px;
+    }
+    .phrase-box {
+      overflow: hidden; position: relative; min-height: 1.25em; margin-bottom: 16px;
+      font-size: clamp(26px, 3.6vw, 42px); line-height: 1.22; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .phrase { display: block; }
+    .phrase em {
+      font-style: normal; color: var(--accent);
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-repeat: no-repeat; background-size: 0% 100%;
+      padding: 0 .12em; margin: 0 -.12em; border-radius: 6px;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone;
+      transition: background-size .45s ease, color .45s ease;
+    }
+    .phrase em.marked { background-size: 100% 100%; color: #fff; }
+    @keyframes phraseIn {
+      from { opacity: 0; transform: translateY(110%); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes phraseOut {
+      to { opacity: 0; transform: translateY(-70%); }
+    }
+    .phrase.enter { animation: phraseIn .5s cubic-bezier(.2,.7,.3,1); }
+    .phrase.leave { animation: phraseOut .35s ease-in forwards; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: none; }
+    }
+    .hero .kicker, .hero h1, .hero .phrase-box, .hero .sub, .hero .employers, .hero-photo {
+      opacity: 0; animation: rise .65s cubic-bezier(.2,.7,.3,1) forwards;
+    }
+    .hero .kicker { animation-delay: .05s; }
+    .hero h1 { animation-delay: .15s; }
+    .hero .phrase-box { animation-delay: .28s; }
+    .hero .sub { animation-delay: .4s; }
+    .hero .employers { animation-delay: .5s; }
+    .hero-photo { animation-delay: .55s; }
+    /* Section heading accent line */
+    h2::after {
+      content: ""; display: block; height: 4px; width: 0;
+      background: var(--accent); margin-top: 14px;
+      transition: width .6s cubic-bezier(.2,.7,.3,1) .15s;
+    }
+    h2.in::after { width: 64px; }
+    .hero p.sub { font-size: 16px; color: var(--gray); max-width: 32em; margin-bottom: 24px; }
+    .employers { font-size: 15px; font-weight: 500; color: var(--fg); }
+    .employers span { color: var(--accent); margin: 0 10px; }
+    .hero-photo { position: relative; max-width: 380px; width: 100%; justify-self: center; }
+    .ptag {
+      position: absolute; z-index: 2;
+      background: #fff; border: 1px solid var(--border); border-radius: 99px;
+      padding: 9px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;
+      box-shadow: 0 8px 22px rgba(10,10,11,.10);
+      animation: floaty 5.5s ease-in-out infinite;
+    }
+    .ptag-1 { top: 4%; left: -14%; }
+    .ptag-2 { top: 42%; right: -22%; background: var(--accent); border-color: var(--accent); color: #fff; animation-delay: 1.4s; }
+    .ptag-3 { bottom: 5%; left: -8%; animation-delay: 2.6s; }
+    @keyframes floaty { 50% { transform: translateY(-9px); } }
+    @media (prefers-reduced-motion: reduce) { .ptag { animation: none; } }
+    @media (max-width: 600px) {
+      .ptag { font-size: 11px; padding: 6px 11px; }
+      .ptag-2 { right: -4%; }
+    }
+    .hero-photo img {
+      width: 100%; height: auto; display: block;
+      border-radius: 50%;
+    }
+    .hero-photo::after {
+      content: ""; position: absolute; inset: 12px -12px -12px 12px;
+      background: var(--accent); z-index: -1; border-radius: 50%;
+    }
+    .photo-placeholder {
+      width: 100%; aspect-ratio: 1; background: #EFEFF2; border: 1px dashed var(--border);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--gray); font-size: 14px; text-align: center; padding: 24px;
+    }
+
+    /* Sections */
+    section { padding: 80px 0; border-top: 1px solid var(--border); }
+    #about, #design { background: #FFFFFF; }
+    #pm { background: #F2F2F5; }
+    #useful { background: var(--fg); border-top: none; }
+    #useful .sec-num { color: var(--accent); }
+    #useful h2 { color: #fff; }
+    #useful .useful > div { border-top-color: rgba(255,255,255,.3); }
+    #useful h3 { color: #fff; }
+    #useful .useful p { color: rgba(255,255,255,.65); }
+    #contact { background: var(--bg); }
+    .sec-head { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; margin-bottom: 48px; }
+    .sec-num { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--accent-ink); text-transform: uppercase; }
+    h2 {
+      font-family: 'Sofia Sans Extra Condensed', sans-serif;
+      font-size: clamp(28px, 3.6vw, 44px); font-weight: 800;
+      text-transform: uppercase; letter-spacing: .015em; line-height: 1.04; margin-top: 8px;
+    }
+    .sec-intro { font-size: 18px; color: var(--gray); align-self: end; max-width: 36em; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+    .about-text p { margin-bottom: 18px; max-width: 42em; }
+    .about-text strong { font-weight: 600; }
+
+    /* Cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .cards.three { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      display: flex; flex-direction: column; gap: 14px; min-width: 0;
+      background: #fff; border: 1px solid var(--border); border-top: 3px solid var(--fg);
+      border-radius: 4px; padding: 28px; text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      background: var(--accent-ink); border-color: var(--accent-ink); border-top-color: var(--fg);
+      box-shadow: 0 16px 36px rgba(212,10,110,.28);
+    }
+    .card-co {
+      font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gray); transition: color .2s;
+    }
+    .role {
+      display: inline-flex; align-items: center; width: fit-content;
+      font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--accent-ink); background: rgba(255,46,136,.08); padding: 5px 12px; border-radius: 99px;
+      white-space: nowrap; transition: color .2s, background-color .2s;
+    }
+    .card-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 10px; flex-wrap: wrap; margin-top: 4px;
+    }
+    .card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; transition: color .2s; }
+    .card p { font-size: 15px; color: var(--gray); flex-grow: 1; transition: color .2s; }
+    .card .more { font-size: 14px; font-weight: 600; color: var(--fg); white-space: nowrap; transition: color .2s; }
+    .card .more::after { content: " →"; color: var(--accent); transition: color .2s; }
+    .card:hover .card-co { color: rgba(255,255,255,.75); }
+    .card:hover h3, .card:hover .more { color: #fff; }
+    .card:hover p { color: rgba(255,255,255,.85); }
+    .card:hover .more::after { color: #fff; }
+    .card:hover .role { background: #fff; color: var(--accent-ink); }
+
+    /* Useful */
+    .useful { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    .useful div { border-top: 3px solid var(--fg); padding-top: 18px; }
+    .useful .n { font-size: 13px; font-weight: 700; color: var(--accent-ink); }
+    .useful h3 { font-size: 17px; font-weight: 700; margin: 6px 0 8px; }
+    .useful p { font-size: 14.5px; color: var(--gray); }
+
+    /* Contact */
+    .contact { text-align: left; }
+    .contact h2 { margin-bottom: 16px; }
+    .contact .lead { font-size: 19px; color: var(--gray); max-width: 34em; margin-bottom: 36px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .btn {
+      display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px;
+      border-radius: 99px; text-decoration: none; font-weight: 600; font-size: 16px;
+      transition: transform .2s, opacity .2s; cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { border: 1.5px solid var(--fg); color: var(--fg); }
+
+    /* Marquee */
+    .marquee { background: var(--accent); overflow: hidden; padding: 16px 0; }
+    .marquee-track { display: flex; width: max-content; animation: scroll 22s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track span {
+      font-family: 'Sofia Sans Extra Condensed', sans-serif;
+      color: #fff; font-weight: 700; font-size: 17px; letter-spacing: .06em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+    .marquee.reverse .marquee-track { animation-direction: reverse; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: 14px; color: var(--gray); }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card, .btn { transition: none; }
+      .hero .kicker, .hero h1, .hero .phrase-box, .hero .sub, .hero .employers, .hero-photo { animation: none; opacity: 1; }
+      .phrase em { transition: none; background-size: 100% 100%; color: #fff; }
+      .phrase.enter, .phrase.leave { animation: none; }
+      .marquee-track { animation: none; }
+      h2::after { transition: none; width: 64px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .cards, .cards.three { grid-template-columns: repeat(2, 1fr); }
+      .useful { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo { max-width: 260px; justify-self: start; }
+      .sec-head, .about-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 56px 24px; }
+      section { padding: 56px 0; }
+      .cards, .cards.three, .useful { grid-template-columns: 1fr; }
+      .logo { font-size: 15px; white-space: nowrap; }
+      nav ul { gap: 14px; }
+      nav a { font-size: 14px; }
+      nav li:first-child { display: none; }
+    }
+  </style>
+</head>
+<body class="loading">
+  <!-- Прелоадер -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <canvas id="loaderCanvas"></canvas>
+    <div class="loader-bar"><span id="loaderFill"></span></div>
+  </div>
+
+  <a class="skip" href="#main">К содержанию</a>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#">Полина Гаврилова<span>.</span></a>
+      <nav aria-label="Основная навигация">
+        <ul>
+          <li><a href="#about">Обо мне</a></li>
+          <li><a href="#pm">Проекты</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Хаос → система: генеративная анимация -->
+    <div class="chaos" aria-hidden="true"><canvas id="chaosCanvas"></canvas></div>
+
+    <!-- Hero -->
+    <div class="hero wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">Руководитель проектов · Арт-директор</span>
+          <h1>Полина Гаврилова</h1>
+          <div class="phrase-box" aria-live="polite">
+            <span class="phrase" id="phrase">Превращаю хаос в <em>работающие системы</em>.</span>
+          </div>
+          <p class="sub">Дизайн-бэкграунд помогает мне понимать и команду, и заказчика, и сам продукт — от айдентики до проектного офиса.</p>
+          <p class="employers">Туризм.РФ <span>·</span> CESCA <span>·</span> Студия Артемия Лебедева <span>·</span> Сбер (Kandinsky)</p>
+        </div>
+        <div class="hero-photo">
+          <img src="assets/polina.jpg" alt="Полина Гаврилова" width="600" height="600"
+               onerror="this.outerHTML='<div class=&quot;photo-placeholder&quot;>Фото: сохраните файл как assets/polina.jpg</div>'">
+          <span class="ptag ptag-1">Управление</span>
+          <span class="ptag ptag-2">AI</span>
+          <span class="ptag ptag-3">Дизайн</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Бегущая строка после первого экрана (в обратную сторону) -->
+    <div class="marquee reverse" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Управление проектами&nbsp;✦&nbsp;Арт-дирекшн&nbsp;✦&nbsp;Процессы&nbsp;✦&nbsp;Айдентика&nbsp;✦&nbsp;AI&nbsp;✦&nbsp;Из&nbsp;хаоса&nbsp;—&nbsp;в&nbsp;систему&nbsp;✦&nbsp;</span>
+        <span>Управление проектами&nbsp;✦&nbsp;Арт-дирекшн&nbsp;✦&nbsp;Процессы&nbsp;✦&nbsp;Айдентика&nbsp;✦&nbsp;AI&nbsp;✦&nbsp;Из&nbsp;хаоса&nbsp;—&nbsp;в&nbsp;систему&nbsp;✦&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <span class="sec-num">01 — Обо мне</span>
+          <h2>Управление + дизайн + AI</h2>
+        </div>
+        <div class="about-text reveal">
+          <p>Я начинала с управления проектами: в <strong>Туризм.РФ</strong> занималась развитием туристских территорий — курортами на Сахалине и в Абрау-Дюрсо.</p>
+          <p>Потом пришла в дизайн: в <strong>Студии Артемия Лебедева</strong> вела проекты для «Магнита», ЦСКА и медицинских клиник, совмещая управление и арт-дирекшн. Параллельно углубилась в нейросети: генерация изображений и видео, автоматизация, агентные системы.</p>
+          <p>Именно это сочетание привело меня в <strong>Сбер</strong> — в команду генеративной нейросети Kandinsky, где я строю проектный офис с нуля и занимаюсь генеративным дизайном.</p>
+          <p>Больше всего люблю задачи, где из сложной и хаотичной информации нужно собрать понятную систему — будь то проект, процесс или айдентика.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PM Projects -->
+    <section id="pm">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="reveal">
+            <span class="sec-num">02 — Проекты</span>
+            <h2>Управление</h2>
+          </div>
+          <p class="sec-intro reveal">Проекты, которые я вела как руководитель — от айдентики федеральных брендов до мастер-планов курортов.</p>
+        </div>
+        <div class="cards">
+          <a class="card reveal" href="https://www.artlebedev.ru/magnit/interiors/" target="_blank" rel="noopener">
+            <span class="card-co">Студия Артемия Лебедева</span>
+            <h3>Интерьеры магазинов «Магнит»</h3>
+            <p>Концепция интерьеров, зонирования и навигации для крупнейшей продуктовой сети России: система указателей, фирменные персонажи, единые правила для дизайнеров и архитекторов.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://www.artlebedev.ru/cska/handball-identity/" target="_blank" rel="noopener">
+            <span class="card-co">Студия Артемия Лебедева</span>
+            <h3>Айдентика гандбольного клуба ЦСКА</h3>
+            <p>Единая айдентика для объединённых мужской и женской команд: логотип в гравюрном стиле на основе щита и звезды, генератор паттернов, носители от билетов до мерча.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://www.artlebedev.ru/fantasy-clinic/templates/" target="_blank" rel="noopener">
+            <span class="card-co">Студия Артемия Лебедева</span>
+            <h3>Коммуникации медгруппы «Фэнтези»</h3>
+            <p>Система дизайн-шаблонов для сети клиник: брошюры, упаковка, модульная сетка и руководство по применению — вплоть до материалов и технологий печати.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://www.artlebedev.ru/yaroshenko/merch/" target="_blank" rel="noopener">
+            <span class="card-co">Студия Артемия Лебедева</span>
+            <h3>Мерч ветклиники доктора Ярошенко</h3>
+            <p>Коллекция сувениров и аксессуаров на основе айдентики клиники — от ежедневников до попон для животных и светоотражающих патчей.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://tourrf.ru/territories/dolina-ayna/" target="_blank" rel="noopener">
+            <span class="card-co">Туризм.РФ</span>
+            <h3>Туристская территория «Долина Айна», Сахалин</h3>
+            <p>Развитие всесезонного курорта: 18 объектов инфраструктуры на 101,3 га, номерной фонд 2 600 номеров, горнолыжные трассы до 80 км.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://tourrf.ru/territories/abrau-dyurso/" target="_blank" rel="noopener">
+            <span class="card-co">Туризм.РФ</span>
+            <h3>Туристский кластер «Абрау-Дюрсо», Краснодарский край</h3>
+            <p>Комплексное развитие курорта федерального значения: отели, реновация набережной озера Абрау, реконструкция исторической части посёлка.</p>
+            <div class="card-foot"><span class="role">Руководитель проекта</span><span class="more">Смотреть проект</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Projects -->
+    <section id="design">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="reveal">
+            <span class="sec-num">03 — Проекты</span>
+            <h2>Дизайн и арт-дирекшн</h2>
+          </div>
+          <p class="sec-intro reveal">Проекты, где я отвечала за визуальную часть — как дизайнер и арт-директор.</p>
+        </div>
+        <div class="cards three">
+          <a class="card reveal" href="https://www.behance.net/gallery/230633303/eksport-i-import-metalla-Tophart-Export" target="_blank" rel="noopener">
+            <span class="card-co">Tophart Export</span>
+            <h3>Айдентика Tophart Export</h3>
+            <p>Визуальный язык для металлоторговой компании: геометричный логотип, модульная система, палитра металлических оттенков. Команда из 8 специалистов.</p>
+            <div class="card-foot"><span class="role">Арт-директор</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://www.behance.net/gallery/211863807/studija-razrabotki-prezentacij-Presentologi" target="_blank" rel="noopener">
+            <span class="card-co">Presentologi</span>
+            <h3>Фирменный стиль Presentologi</h3>
+            <p>Логотип и айдентика для студии бизнес-презентаций. В основе — диаграмма как главный графический элемент: минимализм и структурность.</p>
+            <div class="card-foot"><span class="role">Дизайнер</span><span class="more">Смотреть проект</span></div>
+          </a>
+          <a class="card reveal" href="https://www.behance.net/gallery/192196381/masterskaja-vokala-Voicedemia-stikery" target="_blank" rel="noopener">
+            <span class="card-co">Voicedemia</span>
+            <h3>Стикерпак Voicedemia</h3>
+            <p>Телеграм-стикеры для вокальной школы с персонажами-преподавателями. Яркая палитра, работа выполнена с использованием AI.</p>
+            <div class="card-foot"><span class="role">Дизайнер</span><span class="more">Смотреть проект</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Useful -->
+    <section id="useful">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="reveal">
+            <span class="sec-num">04 — Направления</span>
+            <h2>Чем могу быть полезна</h2>
+          </div>
+        </div>
+        <div class="useful">
+          <div class="reveal">
+            <span class="n">01</span>
+            <h3>Управление проектами</h3>
+            <p>Дизайн- и креативные проекты: от брифа до результата, со сроками и без потерь.</p>
+          </div>
+          <div class="reveal">
+            <span class="n">02</span>
+            <h3>Процессы и PMO</h3>
+            <p>Построение процессов и проектных офисов — в том числе с нуля.</p>
+          </div>
+          <div class="reveal">
+            <span class="n">03</span>
+            <h3>Арт-дирекшн</h3>
+            <p>Айдентика, презентации, визуальные системы и контроль качества.</p>
+          </div>
+          <div class="reveal">
+            <span class="n">04</span>
+            <h3>AI в работе</h3>
+            <p>Внедрение AI в рабочие процессы: генерация, автоматизация, агентные системы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <span class="sec-num reveal">05 — Контакты</span>
+        <h2 class="reveal">Открыта к профессиональному общению</h2>
+        <p class="lead reveal">Интересные проекты, выступления, обмен опытом — пишите, отвечаю в Telegram быстрее всего.</p>
+        <div class="contact-links reveal">
+          <a class="btn btn-primary" href="https://t.me/gavrilova_pd" target="_blank" rel="noopener">Написать в Telegram</a>
+          <a class="btn btn-ghost" href="mailto:polinagavrilova93@gmail.com">Мой Gmail</a>
+          <a class="btn btn-ghost" href="https://www.behance.net/serioznaja" target="_blank" rel="noopener">Behance</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Управление проектами&nbsp;✦&nbsp;Арт-дирекшн&nbsp;✦&nbsp;Процессы&nbsp;✦&nbsp;Айдентика&nbsp;✦&nbsp;AI&nbsp;✦&nbsp;Из&nbsp;хаоса&nbsp;—&nbsp;в&nbsp;систему&nbsp;✦&nbsp;</span>
+      <span>Управление проектами&nbsp;✦&nbsp;Арт-дирекшн&nbsp;✦&nbsp;Процессы&nbsp;✦&nbsp;Айдентика&nbsp;✦&nbsp;AI&nbsp;✦&nbsp;Из&nbsp;хаоса&nbsp;—&nbsp;в&nbsp;систему&nbsp;✦&nbsp;</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© 2026 Полина Гаврилова</span>
+      <span>Москва</span>
+    </div>
+  </footer>
+
+  <script>
+    // Неразрывные пробелы после коротких предлогов и союзов (висячие предлоги)
+    const typo = s => s.replace(
+      /(^|[\s(«„>])(в|во|и|или|а|но|с|со|на|от|до|к|ко|по|за|у|о|об|обо|без|для|при|не|ни|из|под|над|как|что|где|это|я|мы|же|бы|ли)\s+/gi,
+      '$1$2\u00A0'
+    );
+    document.querySelectorAll('h1, h2, h3, p, .phrase, .sec-intro, .kicker').forEach(el => {
+      el.innerHTML = typo(el.innerHTML);
+    });
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animated = document.querySelectorAll('.reveal, h2');
+
+    if (!reduced) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      animated.forEach(el => io.observe(el));
+    } else {
+      animated.forEach(el => el.classList.add('in'));
+    }
+
+    // Хаос → система: точки рассыпаются и собираются в сетку
+    (function () {
+      const cv = document.getElementById('chaosCanvas');
+      const ctx = cv.getContext('2d');
+      let dots = [], W = 0, H = 0;
+      const init = () => {
+        const dpr = window.devicePixelRatio || 1;
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        dots = [];
+        const gap = 34;
+        const cols = Math.max(8, Math.floor(W / gap));
+        const rows = Math.max(3, Math.floor(H / gap));
+        const ox = (W - (cols - 1) * gap) / 2, oy = (H - (rows - 1) * gap) / 2;
+        for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+          dots.push({
+            gx: ox + c * gap, gy: oy + r * gap,
+            bx: Math.random() * W, by: Math.random() * H,
+            s1: Math.random() * 6.28, s2: Math.random() * 6.28,
+            f: .3 + Math.random() * .5, pink: Math.random() < .12
+          });
+        }
+      };
+      const ease = t => t * t * (3 - 2 * t);
+      const draw = t => {
+        ctx.clearRect(0, 0, W, H);
+        const p = ease((Math.sin(t * .00045) + 1) / 2); // 0 = хаос, 1 = сетка
+        for (const d of dots) {
+          const wx = d.bx + Math.sin(t * .001 * d.f + d.s1) * 30;
+          const wy = d.by + Math.cos(t * .0012 * d.f + d.s2) * 22;
+          const x = wx + (d.gx - wx) * p, y = wy + (d.gy - wy) * p;
+          ctx.beginPath();
+          ctx.arc(x, y, d.pink ? 3 : 2.2, 0, 6.28);
+          ctx.fillStyle = d.pink ? '#FF2E88' : '#0A0A0B';
+          ctx.globalAlpha = d.pink ? 1 : .7;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      };
+      init();
+      window.addEventListener('resize', init);
+      if (reduced) {
+        draw(Math.PI / 2 / .00045); // статичная собранная сетка
+      } else {
+        const loop = ts => { draw(ts); requestAnimationFrame(loop); };
+        requestAnimationFrame(loop);
+      }
+    })();
+
+    // Rotating hero phrases
+    const phrases = [
+      'Превращаю хаос в <em>работающие системы</em>.',
+      'Веду проекты от брифа <em>до результата</em>.',
+      'Соединяю дизайн <em>и управление</em>.',
+      'Объясняю сложное <em>простым языком</em>.'
+    ].map(typo);
+    const phraseEl = document.getElementById('phrase');
+    const mark = () => { const em = phraseEl.querySelector('em'); if (em) em.classList.add('marked'); };
+
+    // Резерв высоты под самую длинную фразу — без прыжков макета
+    const phraseBox = phraseEl.parentElement;
+    const reserveHeight = () => {
+      const probe = document.createElement('span');
+      probe.className = 'phrase';
+      probe.style.cssText = 'visibility:hidden;position:absolute;left:0;right:0;top:0';
+      phraseBox.appendChild(probe);
+      let max = 0;
+      phrases.forEach(p => { probe.innerHTML = p; max = Math.max(max, probe.offsetHeight); });
+      probe.remove();
+      phraseBox.style.minHeight = max + 'px';
+    };
+    reserveHeight();
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(reserveHeight); }
+    window.addEventListener('resize', reserveHeight);
+
+    const startPhrases = () => {
+      let pi = 0;
+      setTimeout(mark, 1300); // first marker after hero entrance
+      setInterval(() => {
+        phraseEl.classList.add('leave');
+        setTimeout(() => {
+          pi = (pi + 1) % phrases.length;
+          phraseEl.innerHTML = phrases[pi];
+          phraseEl.classList.remove('leave');
+          phraseEl.classList.add('enter');
+          setTimeout(mark, 700);      // подчёркивание после появления
+          setTimeout(() => phraseEl.classList.remove('enter'), 600);
+        }, 360);
+      }, 4600);
+    };
+
+    // Прелоадер: шарики + полоса загрузки; на 100% разлетаются
+    (function () {
+      const loader = document.getElementById('loader');
+      const unlock = () => document.body.classList.remove('loading');
+
+      if (reduced) { loader.remove(); unlock(); mark(); return; }
+
+      const cv = document.getElementById('loaderCanvas');
+      const ctx = cv.getContext('2d');
+      const fill = document.getElementById('loaderFill');
+      let dots = [], W = 0, H = 0, raf = 0, state = 'float', fade = 1, prog = 0;
+
+      const init = () => {
+        const dpr = window.devicePixelRatio || 1;
+        W = window.innerWidth; H = window.innerHeight;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      init();
+      window.addEventListener('resize', init);
+
+      for (let i = 0; i < 90; i++) {
+        dots.push({
+          bx: Math.random() * W, by: Math.random() * H,
+          s1: Math.random() * 6.28, s2: Math.random() * 6.28,
+          f: .3 + Math.random() * .5, pink: Math.random() < .14,
+          fx: 0, fy: 0, dx: 0, dy: 0, sp: 0
+        });
+      }
+
+      const draw = t => {
+        ctx.clearRect(0, 0, W, H);
+        if (state === 'float' && prog < 90) {
+          prog += (90 - prog) * .025;
+          fill.style.width = prog + '%';
+        }
+        for (const d of dots) {
+          if (state === 'float') {
+            d.fx = d.bx + Math.sin(t * .001 * d.f + d.s1) * 34;
+            d.fy = d.by + Math.cos(t * .0012 * d.f + d.s2) * 26;
+          } else {
+            d.fx += d.dx * d.sp; d.fy += d.dy * d.sp; d.sp *= 1.05;
+          }
+          ctx.beginPath();
+          ctx.arc(d.fx, d.fy, d.pink ? 3.4 : 2.6, 0, 6.28);
+          ctx.fillStyle = d.pink ? '#FF2E88' : '#0A0A0B';
+          ctx.globalAlpha = (d.pink ? 1 : .7) * fade;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        if (state === 'explode') fade = Math.max(0, fade - .02);
+        raf = requestAnimationFrame(draw);
+      };
+      raf = requestAnimationFrame(draw);
+
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        fill.style.width = '100%';
+        setTimeout(() => {
+          state = 'explode';
+          for (const d of dots) {
+            const ang = Math.atan2(d.fy - H / 2, d.fx - W / 2) + (Math.random() - .5) * .5;
+            d.dx = Math.cos(ang); d.dy = Math.sin(ang);
+            d.sp = 3 + Math.random() * 5;
+          }
+        }, 280);
+        setTimeout(() => { loader.classList.add('done'); unlock(); startPhrases(); }, 900);
+        setTimeout(() => { cancelAnimationFrame(raf); loader.remove(); }, 1500);
+      };
+
+      const t0 = performance.now();
+      const onReady = () => setTimeout(finish, Math.max(0, 1000 - (performance.now() - t0)));
+      if (document.readyState === 'complete') onReady();
+      else window.addEventListener('load', onReady);
+      setTimeout(finish, 5000); // страховка, если load задержится
+    })();
+  </script>
+</body>
+</html>
