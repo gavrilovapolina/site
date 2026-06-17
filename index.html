@@ -309,7 +309,7 @@
       .cards, .cards.three { grid-template-columns: repeat(2, 1fr); }
       .useful { grid-template-columns: repeat(2, 1fr); }
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-photo { max-width: 260px; justify-self: start; }
+      .hero-photo { max-width: 260px; justify-self: center; }
       .sec-head, .about-grid { grid-template-columns: 1fr; gap: 16px; }
     }
     @media (max-width: 600px) {
@@ -320,6 +320,12 @@
       nav ul { gap: 14px; }
       nav a { font-size: 14px; }
       nav li:first-child { display: none; }
+      .hero-photo { max-width: 220px; }
+      .ptag-1 { left: -4%; }
+      .ptag-3 { left: -2%; }
+      .ptag-2 { right: -2%; }
+      .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-links .btn-primary { grid-column: 1 / -1; text-align: center; }
     }
   </style>
 </head>
