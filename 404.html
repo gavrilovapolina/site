@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — страница не найдена | Полина Гаврилова</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sofia+Sans+Extra+Condensed:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #EFEFF2;
+      --fg: #0A0A0B;
+      --gray: #6B6B70;
+      --accent: #FF2E88;
+      --accent-ink: #D40A6E;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--fg);
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 24px; position: relative; overflow: hidden;
+    }
+    .chaos { position: absolute; inset: 0; z-index: 0;
+      -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, #000 75%);
+      mask-image: radial-gradient(ellipse at center, transparent 30%, #000 75%);
+    }
+    .chaos canvas { width: 100%; height: 100%; display: block; }
+    .content { position: relative; z-index: 1; }
+    .code {
+      font-family: 'Sofia Sans Extra Condensed', sans-serif;
+      font-weight: 800; font-size: clamp(120px, 28vw, 260px);
+      line-height: 1; letter-spacing: .02em; color: var(--fg);
+    }
+    .code span { color: var(--accent); }
+    h1 { font-size: 22px; font-weight: 700; margin: 8px 0 12px; }
+    p { color: var(--gray); font-size: 16px; max-width: 26em; margin: 0 auto 28px; }
+    .btn {
+      display: inline-block; background: var(--accent); color: #fff;
+      font-weight: 600; font-size: 15px; text-decoration: none;
+      padding: 14px 28px; border-radius: 99px;
+      transition: background .2s;
+    }
+    .btn:hover { background: var(--accent-ink); }
+  </style>
+</head>
+<body>
+  <div class="chaos" aria-hidden="true"><canvas id="chaosCanvas"></canvas></div>
+  <div class="content">
+    <div class="code">4<span>0</span>4</div>
+    <h1>Такой страницы нет</h1>
+    <p>Возможно, в адресе опечатка — или страница уехала наводить порядок где-то ещё. Из хаоса&nbsp;—&nbsp;в&nbsp;систему.</p>
+    <a class="btn" href="/">На главную</a>
+  </div>
+  <script>
+    // Та же анимация «хаос → сетка», что на главной
+    (function () {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const cv = document.getElementById('chaosCanvas');
+      const ctx = cv.getContext('2d');
+      let dots = [], W = 0, H = 0;
+      const init = () => {
+        const dpr = window.devicePixelRatio || 1;
+        W = cv.clientWidth; H = cv.clientHeight;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        dots = [];
+        const gap = 34;
+        const cols = Math.max(8, Math.floor(W / gap));
+        const rows = Math.max(3, Math.floor(H / gap));
+        const ox = (W - (cols - 1) * gap) / 2, oy = (H - (rows - 1) * gap) / 2;
+        for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+          dots.push({
+            gx: ox + c * gap, gy: oy + r * gap,
+            bx: Math.random() * W, by: Math.random() * H,
+            s1: Math.random() * 6.28, s2: Math.random() * 6.28,
+            f: .3 + Math.random() * .5, pink: Math.random() < .12
+          });
+        }
+      };
+      const ease = t => t * t * (3 - 2 * t);
+      const draw = t => {
+        ctx.clearRect(0, 0, W, H);
+        const p = ease((Math.sin(t * .00045) + 1) / 2);
+        for (const d of dots) {
+          const wx = d.bx + Math.sin(t * .001 * d.f + d.s1) * 30;
+          const wy = d.by + Math.cos(t * .0012 * d.f + d.s2) * 22;
+          const x = wx + (d.gx - wx) * p, y = wy + (d.gy - wy) * p;
+          ctx.beginPath();
+          ctx.arc(x, y, d.pink ? 3 : 2.2, 0, 6.28);
+          ctx.fillStyle = d.pink ? '#FF2E88' : '#0A0A0B';
+          ctx.globalAlpha = d.pink ? 1 : .7;
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      };
+      init();
+      window.addEventListener('resize', init);
+      if (reduced) {
+        draw(Math.PI / 2 / .00045);
+      } else {
+        const loop = ts => { draw(ts); requestAnimationFrame(loop); };
+        requestAnimationFrame(loop);
+      }
+    })();
+  </script>
+</body>
+</html>
