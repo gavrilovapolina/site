@@ -98,7 +98,12 @@
       mask-image: linear-gradient(#000 55%, transparent 100%);
     }
     .chaos canvas { width: 100%; height: 100%; display: block; }
-    @media (max-width: 600px) { .chaos { height: 200px; } }
+    .chaos-footer {
+      height: 120px;
+      -webkit-mask-image: linear-gradient(transparent 0%, #000 45%);
+      mask-image: linear-gradient(transparent 0%, #000 45%);
+    }
+    @media (max-width: 600px) { .chaos { height: 200px; } .chaos-footer { height: 66px; } }
 
     /* Hero */
     .hero { padding: 0 24px 80px; margin-top: -130px; position: relative; z-index: 1; }
@@ -164,17 +169,17 @@
     .ptag {
       position: absolute; z-index: 2;
       background: #fff; border: 1px solid var(--border); border-radius: 99px;
-      padding: 9px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;
+      padding: 10px 18px; font-size: 15px; font-weight: 600; white-space: nowrap;
       box-shadow: 0 8px 22px rgba(10,10,11,.10);
       animation: floaty 5.5s ease-in-out infinite;
     }
     .ptag-1 { top: 4%; left: -14%; }
-    .ptag-2 { top: 42%; right: -22%; background: var(--accent); border-color: var(--accent); color: #fff; animation-delay: 1.4s; }
+    .ptag-2 { top: 42%; right: -8%; background: var(--accent); border-color: var(--accent); color: #fff; animation-delay: 1.4s; }
     .ptag-3 { bottom: 5%; left: -8%; animation-delay: 2.6s; }
     @keyframes floaty { 50% { transform: translateY(-9px); } }
     @media (prefers-reduced-motion: reduce) { .ptag { animation: none; } }
     @media (max-width: 600px) {
-      .ptag { font-size: 11px; padding: 6px 11px; }
+      .ptag { font-size: 12px; padding: 6px 11px; }
       .ptag-2 { right: -4%; }
     }
     .hero-photo img {
@@ -362,7 +367,7 @@
           <span class="kicker">Руководитель проектов · Арт-директор</span>
           <h1>Полина Гаврилова</h1>
           <div class="phrase-box" aria-live="polite">
-            <span class="phrase" id="phrase">Превращаю хаос в <em>работающие системы</em>.</span>
+            <span class="phrase" id="phrase">Превращаю хаос в <em>работающие системы</em></span>
           </div>
           <p class="sub">Дизайн-бэкграунд помогает мне понимать и команду, и заказчика, и сам продукт — от айдентики до проектного офиса.</p>
           <p class="employers">Туризм.РФ <span>·</span> CESCA <span>·</span> Студия Артемия Лебедева <span>·</span> Сбер (Kandinsky)</p>
@@ -552,6 +557,9 @@
     </div>
   </footer>
 
+  <!-- Хаос → система: та же анимация после подвала, растворение кверху -->
+  <div class="chaos chaos-footer" aria-hidden="true"><canvas id="chaosCanvasFooter"></canvas></div>
+
   <script>
     // Неразрывные пробелы после коротких предлогов и союзов (висячие предлоги)
     const typo = s => s.replace(
@@ -575,8 +583,7 @@
     }
 
     // Хаос → система: точки рассыпаются и собираются в сетку
-    (function () {
-      const cv = document.getElementById('chaosCanvas');
+    const chaosAnim = function (cv) {
       const ctx = cv.getContext('2d');
       let dots = [], W = 0, H = 0;
       const init = () => {
@@ -622,14 +629,16 @@
         const loop = ts => { draw(ts); requestAnimationFrame(loop); };
         requestAnimationFrame(loop);
       }
-    })();
+    };
+    chaosAnim(document.getElementById('chaosCanvas'));
+    chaosAnim(document.getElementById('chaosCanvasFooter'));
 
     // Rotating hero phrases
     const phrases = [
-      'Превращаю хаос в <em>работающие системы</em>.',
-      'Веду проекты от брифа <em>до результата</em>.',
-      'Соединяю дизайн <em>и управление</em>.',
-      'Объясняю сложное <em>простым языком</em>.'
+      'Превращаю хаос в <em>работающие системы</em>',
+      'Веду проекты от брифа <em>до результата</em>',
+      'Соединяю дизайн <em>и управление</em>',
+      'Объясняю сложное <em>простым языком</em>'
     ].map(typo);
     const phraseEl = document.getElementById('phrase');
     const mark = () => { const em = phraseEl.querySelector('em'); if (em) em.classList.add('marked'); };
