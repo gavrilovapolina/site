@@ -264,6 +264,7 @@
     /* Cards */
     .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
     .cards.three { grid-template-columns: repeat(3, 1fr); }
+    .cards.four { grid-template-columns: repeat(4, 1fr); }
     .card {
       display: flex; flex-direction: column; gap: 14px; min-width: 0;
       background: #fff; border: 1px solid var(--border); border-top: 3px solid var(--fg);
@@ -351,7 +352,7 @@
 
     /* Responsive */
     @media (max-width: 960px) {
-      .cards, .cards.three { grid-template-columns: repeat(2, 1fr); }
+      .cards, .cards.three, .cards.four { grid-template-columns: repeat(2, 1fr); }
       .useful { grid-template-columns: repeat(2, 1fr); }
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero-photo { max-width: 260px; justify-self: center; }
@@ -360,7 +361,7 @@
     @media (max-width: 600px) {
       .hero { padding: 56px 24px; }
       section { padding: 56px 0; }
-      .cards, .cards.three, .useful { grid-template-columns: 1fr; }
+      .cards, .cards.three, .cards.four, .useful { grid-template-columns: 1fr; }
       .logo { font-size: 15px; white-space: nowrap; }
       nav ul { gap: 14px; }
       nav a { font-size: 14px; }
@@ -517,7 +518,13 @@
           </div>
           <p class="sec-intro reveal">Проекты, где я отвечала за визуальную часть — как дизайнер и арт-директор.</p>
         </div>
-        <div class="cards three">
+        <div class="cards four">
+          <a class="card reveal" href="https://kandinskylab.ai/" target="_blank" rel="noopener">
+            <span class="card-co">Сбер</span>
+            <h3>Сайт Kandinsky Lab</h3>
+            <p>Дизайн, контент, SEO и аналитика — сделала сайт нейросети Kandinsky одна: от макета до настройки метрик.</p>
+            <div class="card-foot"><span class="role">Дизайнер</span><span class="more">Смотреть проект</span></div>
+          </a>
           <a class="card reveal" href="https://www.behance.net/gallery/230633303/eksport-i-import-metalla-Tophart-Export" target="_blank" rel="noopener">
             <span class="card-co">Tophart Export</span>
             <h3>Айдентика Tophart Export</h3>
