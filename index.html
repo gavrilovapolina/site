@@ -193,7 +193,18 @@
     .hero p.sub { font-size: 16px; color: var(--gray); max-width: 32em; margin-bottom: 24px; }
     .employers { font-size: 15px; font-weight: 500; color: var(--fg); }
     .employers span { color: var(--accent); margin: 0 10px; }
-    .hero-cta { margin-top: 28px; }
+    .scroll-cue {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      width: fit-content; margin: 48px auto 0; text-decoration: none;
+      font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--gray); transition: color .2s;
+      animation: cueBounce 2.2s ease-in-out infinite;
+    }
+    .scroll-cue:hover { color: var(--accent-ink); }
+    .scroll-cue svg { color: var(--accent); }
+    @keyframes cueBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+    @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; } }
+    @media (max-width: 600px) { .scroll-cue { margin-top: 32px; font-size: 12px; } }
     .hero-photo { position: relative; max-width: 380px; width: 100%; justify-self: center; }
     .ptag {
       position: absolute; z-index: 2;
@@ -401,7 +412,6 @@
           </div>
           <p class="sub">Дизайн-бэкграунд помогает мне понимать и команду, и заказчика, и сам продукт — от айдентики до проектного офиса.</p>
           <p class="employers">Туризм.РФ <span>·</span> CESCA <span>·</span> Студия Артемия Лебедева <span>·</span> Сбер (Kandinsky)</p>
-          <a class="btn btn-primary hero-cta" href="https://t.me/gavrilova_pd" target="_blank" rel="noopener">Написать в Telegram</a>
         </div>
         <div class="hero-photo">
           <picture>
@@ -414,6 +424,10 @@
           <span class="ptag ptag-3">Дизайн</span>
         </div>
       </div>
+      <a class="scroll-cue" href="#pm" aria-label="Смотреть проекты">
+        <span>Смотреть проекты</span>
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
 
     <!-- Бегущая строка после первого экрана (в обратную сторону) -->
