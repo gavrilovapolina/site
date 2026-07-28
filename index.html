@@ -80,7 +80,9 @@
       background: rgba(239,239,242,.92); backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+    .nav-cta { padding: 9px 18px; font-size: 14px; white-space: nowrap; }
+    @media (max-width: 600px) { .nav-cta { display: none; } }
     .logo {
       font-family: 'Sofia Sans Extra Condensed', sans-serif; font-weight: 800; font-size: 19px;
       text-transform: uppercase; letter-spacing: .02em; text-decoration: none;
@@ -191,6 +193,7 @@
     .hero p.sub { font-size: 16px; color: var(--gray); max-width: 32em; margin-bottom: 24px; }
     .employers { font-size: 15px; font-weight: 500; color: var(--fg); }
     .employers span { color: var(--accent); margin: 0 10px; }
+    .hero-cta { margin-top: 28px; }
     .hero-photo { position: relative; max-width: 380px; width: 100%; justify-self: center; }
     .ptag {
       position: absolute; z-index: 2;
@@ -379,6 +382,7 @@
           <li><a href="#contact">Контакты</a></li>
         </ul>
       </nav>
+      <a class="btn btn-primary nav-cta" href="https://t.me/gavrilova_pd" target="_blank" rel="noopener">Написать</a>
     </div>
   </header>
 
@@ -397,6 +401,7 @@
           </div>
           <p class="sub">Дизайн-бэкграунд помогает мне понимать и команду, и заказчика, и сам продукт — от айдентики до проектного офиса.</p>
           <p class="employers">Туризм.РФ <span>·</span> CESCA <span>·</span> Студия Артемия Лебедева <span>·</span> Сбер (Kandinsky)</p>
+          <a class="btn btn-primary hero-cta" href="https://t.me/gavrilova_pd" target="_blank" rel="noopener">Написать в Telegram</a>
         </div>
         <div class="hero-photo">
           <picture>
