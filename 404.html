@@ -8,105 +8,108 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sofia+Sans+Extra+Condensed:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Sofia+Sans+Extra+Condensed:wght@800&family=Caveat:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #EFEFF2;
-      --fg: #0A0A0B;
-      --gray: #6B6B70;
+      --page-bg: #EFEFEC;
+      --paper: #FBF9F4;
+      --ink: #141414;
+      --gray: #6E6C66;
+      --line: #DEDAD0;
       --accent: #FF2E88;
-      --accent-ink: #D40A6E;
+      --yellow: #FFE79E;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
-      background: var(--bg); color: var(--fg);
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; text-align: center;
+      background: var(--page-bg); color: var(--ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
       padding: 24px; position: relative; overflow: hidden;
     }
-    .chaos { position: absolute; inset: 0; z-index: 0;
-      -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, #000 75%);
-      mask-image: radial-gradient(ellipse at center, transparent 30%, #000 75%);
+    .bg-blob { position: fixed; border-radius: 50%; filter: blur(60px); opacity: .35; z-index: 0; pointer-events: none; }
+    .bg-blob.b1 { width: 360px; height: 360px; background: #B7F1DC; top: -100px; left: -120px; }
+    .bg-blob.b2 { width: 320px; height: 320px; background: #FFD0E4; bottom: -120px; right: -100px; }
+
+    .card {
+      position: relative; z-index: 1;
+      width: min(92vw, 420px);
+      background: var(--paper); border-radius: 3px 14px 3px 3px;
+      box-shadow: 0 2px 4px rgba(20,20,20,.05), 0 18px 40px rgba(20,20,20,.14), 0 4px 10px rgba(20,20,20,.06);
+      padding: clamp(32px, 6vw, 52px) clamp(24px, 5vw, 40px);
+      text-align: center;
+      opacity: 0; transform: translateY(16px) scale(.98);
+      transition: opacity .6s cubic-bezier(.2,.7,.3,1), transform .6s cubic-bezier(.2,.7,.3,1);
     }
-    .chaos canvas { width: 100%; height: 100%; display: block; }
-    .content { position: relative; z-index: 1; }
+    .card.in { opacity: 1; transform: none; }
+
+    .paperclip-wrap { position: absolute; top: -16px; right: 30px; width: 30px; height: 76px; }
+    .paperclip { width: 100%; height: 100%; display: block; filter: drop-shadow(1px 4px 4px rgba(20,20,20,.3)); animation: clipFloat 5s ease-in-out infinite; }
+    @keyframes clipFloat { 50% { transform: translateY(-3px); } }
+
     .code {
       font-family: 'Sofia Sans Extra Condensed', sans-serif;
-      font-weight: 800; font-size: clamp(120px, 28vw, 260px);
-      line-height: 1; letter-spacing: .02em; color: var(--fg);
+      font-weight: 800; font-size: clamp(80px, 20vw, 130px);
+      line-height: .9; letter-spacing: .01em; color: var(--ink);
     }
     .code span { color: var(--accent); }
-    h1 { font-size: 22px; font-weight: 700; margin: 8px 0 12px; }
-    p { color: var(--gray); font-size: 16px; max-width: 26em; margin: 0 auto 28px; }
-    .btn {
-      display: inline-block; background: var(--accent); color: #fff;
-      font-weight: 600; font-size: 15px; text-decoration: none;
-      padding: 14px 28px; border-radius: 99px;
-      transition: background .2s;
+    h1 { font-size: 19px; font-weight: 700; margin: 10px 0 10px; }
+    p { color: var(--gray); font-size: 14.5px; line-height: 1.5; max-width: 30em; margin: 0 auto 28px; }
+
+    .note-cta {
+      position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      width: 128px; aspect-ratio: 1/1;
+      background: var(--yellow); padding: 14px; border-radius: 2px;
+      text-decoration: none; color: var(--ink); transform: rotate(-3deg);
+      box-shadow: 0 10px 22px rgba(20,20,20,.16);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .btn:hover { background: var(--accent-ink); }
+    .note-cta:hover { transform: rotate(0deg) translateY(-3px); box-shadow: 0 16px 30px rgba(20,20,20,.2); }
+    .note-tape {
+      position: absolute; top: -11px; left: 50%; margin-left: -30px; width: 60px; height: 22px;
+      background: rgba(255,150,150,.6); transform: rotate(-4deg);
+    }
+    .note-text { font-family: 'Caveat', cursive; font-weight: 700; font-size: 22px; line-height: 1.05; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .paperclip { transition: none; animation: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="chaos" aria-hidden="true"><canvas id="chaosCanvas"></canvas></div>
-  <div class="content">
+  <div class="bg-blob b1" aria-hidden="true"></div>
+  <div class="bg-blob b2" aria-hidden="true"></div>
+
+  <div class="card" id="card">
+    <div class="paperclip-wrap">
+      <svg class="paperclip" viewBox="0 0 40 90" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="clipMetal" x1="0" y1="0" x2="1" y2="0.15">
+            <stop offset="0%" stop-color="#AFB2B7"/>
+            <stop offset="18%" stop-color="#F7F8F9"/>
+            <stop offset="38%" stop-color="#8E9196"/>
+            <stop offset="58%" stop-color="#E4E5E7"/>
+            <stop offset="80%" stop-color="#75787D"/>
+            <stop offset="100%" stop-color="#C4C6C9"/>
+          </linearGradient>
+        </defs>
+        <path d="M8 14V70a12 12 0 0 0 24 0V20" stroke="url(#clipMetal)" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M14 24V62a6 6 0 0 0 12 0V12" stroke="url(#clipMetal)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <div class="code">4<span>0</span>4</div>
     <h1>Такой страницы нет</h1>
-    <p>Возможно, в адресе опечатка — или страница уехала наводить порядок где-то ещё. Из хаоса&nbsp;—&nbsp;в&nbsp;систему.</p>
-    <a class="btn" href="/">На главную</a>
+    <p>Возможно, в адресе опечатка — или страница уехала наводить порядок где-то ещё.</p>
+
+    <a class="note-cta" href="/">
+      <span class="note-tape" aria-hidden="true"></span>
+      <span class="note-text">На главную</span>
+    </a>
   </div>
+
   <script>
-    // Та же анимация «хаос → сетка», что на главной
-    (function () {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const cv = document.getElementById('chaosCanvas');
-      const ctx = cv.getContext('2d');
-      let dots = [], W = 0, H = 0;
-      const init = () => {
-        const dpr = window.devicePixelRatio || 1;
-        W = cv.clientWidth; H = cv.clientHeight;
-        cv.width = W * dpr; cv.height = H * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        dots = [];
-        const gap = 34;
-        const cols = Math.max(8, Math.floor(W / gap));
-        const rows = Math.max(3, Math.floor(H / gap));
-        const ox = (W - (cols - 1) * gap) / 2, oy = (H - (rows - 1) * gap) / 2;
-        for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-          dots.push({
-            gx: ox + c * gap, gy: oy + r * gap,
-            bx: Math.random() * W, by: Math.random() * H,
-            s1: Math.random() * 6.28, s2: Math.random() * 6.28,
-            f: .3 + Math.random() * .5, pink: Math.random() < .12
-          });
-        }
-      };
-      const ease = t => t * t * (3 - 2 * t);
-      const draw = t => {
-        ctx.clearRect(0, 0, W, H);
-        const p = ease((Math.sin(t * .00045) + 1) / 2);
-        for (const d of dots) {
-          const wx = d.bx + Math.sin(t * .001 * d.f + d.s1) * 30;
-          const wy = d.by + Math.cos(t * .0012 * d.f + d.s2) * 22;
-          const x = wx + (d.gx - wx) * p, y = wy + (d.gy - wy) * p;
-          ctx.beginPath();
-          ctx.arc(x, y, d.pink ? 3 : 2.2, 0, 6.28);
-          ctx.fillStyle = d.pink ? '#FF2E88' : '#0A0A0B';
-          ctx.globalAlpha = d.pink ? 1 : .7;
-          ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-      };
-      init();
-      window.addEventListener('resize', init);
-      if (reduced) {
-        draw(Math.PI / 2 / .00045);
-      } else {
-        const loop = ts => { draw(ts); requestAnimationFrame(loop); };
-        requestAnimationFrame(loop);
-      }
-    })();
+    requestAnimationFrame(() => document.getElementById('card').classList.add('in'));
   </script>
 </body>
 </html>
