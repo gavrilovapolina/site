@@ -99,9 +99,9 @@
   .grain svg{width:100%;height:100%;}
 
   /* paperclip */
-  .paperclip-wrap{ position:absolute; top:-16px; right:36px; width:34px; height:86px; z-index:5; transition:transform .25s ease-out; }
-  .paperclip{ width:100%; height:100%; display:block; animation:clipFloat 5s ease-in-out infinite; filter:drop-shadow(1px 4px 4px rgba(20,20,20,.3)); }
-  @keyframes clipFloat{ 50%{ transform:translateY(-3px); } }
+  .paperclip-wrap{ position:absolute; top:-11px; right:34px; width:28px; height:58px; z-index:5; transition:transform .25s ease-out; }
+  .paperclip{ width:100%; height:100%; display:block; transform:rotate(-8deg); transform-origin:55% 35%; animation:clipFloat 5s ease-in-out infinite; filter:drop-shadow(1px 5px 5px rgba(20,20,20,.25)); }
+  @keyframes clipFloat{ 50%{ transform:rotate(-8deg) translateY(-3px); } }
 
   /* ---- header (persistent) ---- */
   .sheet-head{ position:relative; z-index:2; }
@@ -285,9 +285,9 @@
         </div>
 
         <div class="paperclip-wrap" id="clipWrap">
-          <svg class="paperclip" viewBox="0 0 40 90" fill="none" aria-hidden="true">
+          <svg class="paperclip" viewBox="0 0 40 86" fill="none" aria-hidden="true">
             <defs>
-              <linearGradient id="clipMetal" x1="0" y1="0" x2="1" y2="0.15">
+              <linearGradient id="clipMetal" x1="0" y1="0" x2="1" y2="0.2">
                 <stop offset="0%" stop-color="#AFB2B7"/>
                 <stop offset="18%" stop-color="#F7F8F9"/>
                 <stop offset="38%" stop-color="#8E9196"/>
@@ -296,8 +296,7 @@
                 <stop offset="100%" stop-color="#C4C6C9"/>
               </linearGradient>
             </defs>
-            <path d="M8 20V70a12 12 0 0 0 24 0V20a12 12 0 0 0 -24 0" stroke="url(#clipMetal)" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M14 24V62a6 6 0 0 0 12 0V2" stroke="url(#clipMetal)" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M14 20V60a5 5 0 0 0 10 0V14a8 8 0 0 0 -16 0V66a12 12 0 0 0 24 0V18" stroke="url(#clipMetal)" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </div>
 
