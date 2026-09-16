@@ -253,19 +253,26 @@
     .proj-grid{ grid-template-columns:1fr; }
   }
 
-  /* ===== Mobile: tabs become horizontal row ===== */
+  /* ===== Mobile: folder tabs sit flush on top of the sheet, fixed sheet height ===== */
   @media (max-width:720px){
     body{ padding:20px 12px; align-items:flex-start; }
-    .stage{ flex-direction:column; align-items:stretch; width:100%; gap:14px; }
+    .stage{ flex-direction:column; align-items:stretch; width:100%; gap:0; }
     .sheet-wrap{ order:2; }
     .tabs{ order:1; }
-    .sheet{ width:100%; aspect-ratio:auto; min-height:70vh; border-radius:10px; }
-    .tabs{ flex-direction:row; margin:0; overflow-x:auto; -webkit-overflow-scrolling:touch; gap:8px; padding-bottom:4px; }
-    .tab{ writing-mode:horizontal-tb; transform:none; border:1.3px solid var(--ink); border-radius:99px; padding:9px 14px; flex:0 0 auto; box-shadow:none; }
-    .tab:hover{ transform:translateY(-2px); }
-    .tab.active{ padding:9px 16px; box-shadow:2px 2px 0 rgba(20,20,20,.12); }
+    .sheet{ width:100%; aspect-ratio:auto; height:72vh; min-height:0; border-radius:0 0 10px 10px; }
+    .tabs{ flex-direction:row; margin:0; gap:0; }
+    .tab{
+      writing-mode:horizontal-tb; transform:none; flex:1 1 0; min-width:0;
+      border:1.3px solid var(--ink); border-radius:8px 8px 0 0;
+      padding:10px 2px; margin-left:-1.3px; box-shadow:none;
+      font-size:8.5px; letter-spacing:.03em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .tab:first-child{ margin-left:0; }
+    .tab:hover{ transform:none; }
+    .tab.active{ padding:10px 2px; box-shadow:none; position:relative; z-index:2; transform:translateY(-2px); }
     .paperclip-wrap{ display:none; }
     .bg-blob{ opacity:.2; }
+    .panel.active{ position:absolute; overflow-y:auto; -webkit-overflow-scrolling:touch; }
   }
 </style>
 </head>
