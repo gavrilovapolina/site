@@ -255,7 +255,7 @@
 
   /* ===== Mobile: folder tabs sit flush on top of the sheet, fixed sheet height ===== */
   @media (max-width:720px){
-    html, body{ height:100vh; height:100dvh; }
+    html, body{ height:100vh; height:calc(var(--vh, 1vh) * 100); }
     body{ padding:12px; align-items:stretch; justify-content:flex-start; overflow:hidden; }
     .stage{ flex-direction:column; align-items:stretch; width:100%; height:100%; gap:0; }
     .sheet-wrap{ order:2; flex:1; min-height:0; display:flex; }
@@ -576,6 +576,13 @@
 
   // reveal on load
   requestAnimationFrame(() => document.getElementById('stage').classList.add('in'));
+
+  // Mobile browsers report an inaccurate 100vh (address bar show/hide isn't
+  // reflected consistently). Measure the real visible height ourselves.
+  const setRealVH = () => document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+  setRealVH();
+  window.addEventListener('resize', setRealVH);
+  window.addEventListener('orientationchange', setRealVH);
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
