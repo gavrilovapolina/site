@@ -110,18 +110,16 @@
   .brand-role{ font-size:clamp(9px,1.1vw,10.5px); font-weight:600; letter-spacing:.1em; color:var(--gray); text-transform:uppercase; margin-top:4px;}
   .head-rule{ height:1px; background:var(--line); margin:clamp(10px,2vw,18px) 0 0; position:relative; z-index:2; }
 
-  /* ---- panel stack: page-flip around the right edge (tab side) ---- */
-  .panels{ position:relative; flex:1; margin-top:clamp(12px,2.2vw,20px); perspective:1600px; }
+  /* ---- panel stack: soft fade between tabs ---- */
+  .panels{ position:relative; flex:1; margin-top:clamp(12px,2.2vw,20px); }
   .panel{
     position:absolute; inset:0;
     opacity:0; pointer-events:none;
-    transform:rotateY(90deg);
-    transform-origin:left center;
-    backface-visibility:hidden;
-    transition:transform .36s cubic-bezier(.45,.05,.35,1), opacity .3s ease;
+    transform:translateY(6px);
+    transition:opacity .32s ease, transform .32s ease;
   }
-  .panel.active{ opacity:1; pointer-events:auto; transform:rotateY(0deg); }
-  .panel.leaving{ opacity:0; transform:rotateY(-90deg); }
+  .panel.active{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .panel.leaving{ opacity:0; transform:translateY(-6px); }
 
   /* ===== ABOUT PANEL ===== */
   .about-top{ display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(14px,2.4vw,26px); align-items:start; }
@@ -594,16 +592,16 @@
         return;
       }
 
-      // phase 1: flip the current page away (like closing it)
+      // phase 1: fade the current panel out
       current.classList.add('leaving');
       current.classList.remove('active');
 
       setTimeout(() => {
-        current.classList.remove('leaving'); // settles back to its resting rotateY(90deg), invisible
-        // phase 2: flip the next page into place (like opening it) from its resting pose
+        current.classList.remove('leaving'); // settles back to its resting (hidden) state
+        // phase 2: fade the next panel in
         next.classList.add('active');
-        setTimeout(() => { switching = false; }, 380);
-      }, 300);
+        setTimeout(() => { switching = false; }, 320);
+      }, 220);
     });
   });
 
